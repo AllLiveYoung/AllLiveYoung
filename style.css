@@ -18,7 +18,7 @@ p {
   color: rgba(120, 300, 220, 1);
   font-family: 'LAB디지털';
   text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
-  line-height: 150ㅋpx;
+  line-height: 120px;
 }
 
 .time_number>.text {
