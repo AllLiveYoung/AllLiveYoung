@@ -9,22 +9,9 @@ function getTime() {
   //clock.innerHTML = hour +":" + minutes + ":"+seconds;
   clock.innerHTML = `${hour < 10 ? `0${hour}` : hour}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
-// 돌아가는 시계 함수
-// const deg = 6;
-// const hr = document.querySelector('#hr');
-// const mn = document.querySelector('#mn');
-// const sc = document.querySelector('#sc');
-// setInterval(() => {
-//   let day = new Date();
-//   let hh = day.getHours() * 30;
-//   let mm = day.getMinutes() * deg;
-//   let ss = day.getSeconds() * deg;
-//   hr.style.transform = `rotateZ(${(hh) + (mm / 12)}deg)`;
-//   mn.style.transform = `rotateZ(${mm}deg)`;
-//   sc.style.transform = `rotateZ(${ss}deg)`;
-// })
+
 // 글자 하나씩 나타나는 함수
-const content = "KEYU";
+const content = "안녕하세요 ";
 const text = document.querySelector(".text");
 let i = 0;
 
@@ -38,7 +25,7 @@ function typing() {
 //init 
 function init() {
   setInterval(getTime, 1000);
-  setInterval(typing, 1000);
+  setInterval(typing, 200);
 }
 
 init();
@@ -61,11 +48,8 @@ window.addEventListener('scroll', noScroll);
 
 // 박스 움직임
 const box = document.querySelector('.box');
-let btnClicker = 20;
-let xPas = -20;
-let yPas = -20;
-let currentxPas = 0;
-let currentyPas = 0;
+let btnClicker = 100;
+let currentPage = 5;
 
 window.addEventListener('keydown', (event) => {
   console.log(event.key);
@@ -77,64 +61,257 @@ window.addEventListener('keydown', (event) => {
   currentPositionLeft = currentPositionLeft.replace('px', '');
   var currentPositionTop = window.getComputedStyle(box, null).getPropertyValue("top");
   currentPositionTop = currentPositionTop.replace('px', '');
+  var currentPositionRight = window.getComputedStyle(box, null).getPropertyValue("right");
+  currentPositionRight = currentPositionRight.replace('px', '');
+  var currentPositionBottom = window.getComputedStyle(box, null).getPropertyValue("bottom");
+  currentPositionBottom = currentPositionBottom.replace('px', '');
 
-  if (xPas >= 0) {
-    switch (KeC) {
-      case 37: //ArrowLeft
-        console.log(currentPositionLeft);
-        xPas += 20;
-        currentxPas = xPas;
-        box.style.left = parseInt(currentPositionLeft) - btnClicker + 'px';
-        break;
-      case 38: //ArrowUp
-        yPas += 20;
-        currentyPas = yPas;
-        console.log(currentPositionTop);
-        box.style.top = parseInt(currentPositionTop) - btnClicker + 'px';
-        break;
-      case 39:  //arrowright
-        xPas -= 20;
-        currentxPas = xPas;
-        console.log(currentPositionLeft);
-        box.style.left = parseInt(currentPositionLeft) + btnClicker + 'px';
-        break;
-      case 40: //ArrowDown
-        yPas -= 20;
-        currentyPas = yPas;
-        console.log(currentPositionTop);
-        box.style.top = parseInt(currentPositionTop) + btnClicker + 'px';
-        break;
+  switch (KeC) {
+    case 37: //ArrowLeft
+      console.log(currentPositionLeft);
+      console.log(currentPositionRight);
+      console.log(currentPositionTop);
+      console.log(currentPositionBottom);
+      box.style.left = parseInt(currentPositionLeft) - btnClicker + 'px';
+      break;
+    case 38: //ArrowUp
+      console.log(currentPositionLeft);
+      console.log(currentPositionRight);
+      console.log(currentPositionTop);
+      console.log(currentPositionBottom);
+      box.style.top = parseInt(currentPositionTop) - btnClicker + 'px';
+      break;
+    case 39:  //arrowright
+      console.log(currentPositionLeft);
+      console.log(currentPositionRight);
+      console.log(currentPositionTop);
+      console.log(currentPositionBottom);
+      box.style.left = parseInt(currentPositionLeft) + btnClicker + 'px';
+      break;
+    case 40: //ArrowDown
+      console.log(currentPositionLeft);
+      console.log(currentPositionRight);
+      console.log(currentPositionTop);
+      console.log(currentPositionBottom);
+      box.style.top = parseInt(currentPositionTop) + btnClicker + 'px';
+      break;
 
-    }
-  } else {
-    switch (KeC) {
-      case 37: //ArrowLeft
-        xPas += 20;
-        currentxPas = xPas;
-        console.log(currentxPas);
-        nineCtn.style.transform = `translateX(${currentxPas}px) translateY(${currentyPas}px)`;
+  }
+  wallCrashCheck();
+  console.log(currentPage);
+  function wallCrashCheck() {
+    switch (currentPage) {
+      case 1:
+        if (currentPositionLeft >= 115 && currentPositionLeft <= 365 && currentPositionTop >= 85 && currentPositionTop <= 335) {
+          console.log('hover');
+          aboutMe();
+        } else {
+          const aboutMe = document.querySelector('.about_me_arr');
+          aboutMe.classList.remove('active');
+        }
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(0)';
+          box.style.left = '0';
+          currentPage = 1;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(0)';
+          box.style.left = '0';
+          currentPage = 2;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(0)';
+          box.style.top = '0';
+          currentPage = 1;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-100vh)';
+          box.style.top = '0';
+          currentPage = 4;
+        }
         break;
-      case 38: //ArrowUp
-        yPas += 20;
-        currentyPas = yPas;
-        console.log(currentyPas);
-        nineCtn.style.transform = `translateY(${currentyPas}px) translateX(${currentxPas}px)`;
+      case 2:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(0)';
+          box.style.left = '94vw';
+          currentPage = 1;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(0)';
+          box.style.left = '0';
+          currentPage = 3;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(0)';
+          box.style.top = '0';
+          currentPage = 2;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-100vh)';
+          box.style.top = '0';
+          currentPage = 5;
+        }
         break;
-      case 39:  //arrowright
-        xPas -= 20;
-        currentxPas = xPas;
-        console.log(currentxPas);
-        nineCtn.style.transform = `translateX(${currentxPas}px) translateY(${currentyPas}px)`;
+      case 3:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(0)';
+          box.style.left = '94vw';
+          currentPage = 2;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(0)';
+          box.style.left = '94vw';
+          currentPage = 3;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(0)';
+          box.style.top = '0';
+          currentPage = 3;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-100vh)';
+          box.style.top = '0';
+          currentPage = 6;
+        }
         break;
-      case 40: //ArrowDown
-        yPas -= 20;
-        currentyPas = yPas;
-        console.log(currentyPas);
-        nineCtn.style.transform = `translateY(${currentyPas}px) translateX(${currentxPas}px)`;
-        // nineCtn.style.transform = ``;
-
+      case 4:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-100vh)';
+          box.style.left = '0';
+          currentPage = 4;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-100vh)';
+          box.style.left = '0';
+          currentPage = 5;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(0)';
+          box.style.top = '87vh';
+          currentPage = 1;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-200vh)';
+          box.style.top = '0';
+          currentPage = 7;
+        }
         break;
-
+      case 5:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-100vh)';
+          box.style.left = '94vw';
+          currentPage = 4;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-100vh)';
+          box.style.left = '0';
+          currentPage = 6;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(0)';
+          box.style.top = '87vh';
+          currentPage = 2;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-200vh)';
+          box.style.top = '0';
+          currentPage = 8;
+        }
+        break;
+      case 6:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-100vh)';
+          box.style.left = '94vw';
+          currentPage = 5;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-100vh)';
+          box.style.left = '94vw';
+          currentPage = 6;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(0)';
+          box.style.top = '89vh';
+          currentPage = 3;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-200vh)';
+          box.style.top = '0';
+          currentPage = 9;
+        }
+        break;
+      case 7:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-200vh)';
+          box.style.left = '0';
+          currentPage = 7;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-200vh)';
+          box.style.left = '0';
+          currentPage = 8;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(0vw) translateY(-100vh)';
+          box.style.top = '89vh';
+          currentPage = 4;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-200vh)';
+          box.style.top = '87vh';
+          currentPage = 7;
+        }
+        break;
+      case 8:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(0) translateY(-200vh)';
+          box.style.left = '94vw';
+          currentPage = 7;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-200vh)';
+          box.style.left = '0';
+          currentPage = 9;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-100vh)';
+          box.style.top = '89vh';
+          currentPage = 5;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-200vh)';
+          box.style.top = '87vh';
+          currentPage = 8;
+        }
+        break;
+      case 9:
+        if (currentPositionLeft < 0) {
+          nineCtn.style.transform = 'translateX(-100vw) translateY(-200vh)';
+          box.style.left = '94vw';
+          currentPage = 8;
+        }
+        if (currentPositionRight < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-200vh)';
+          box.style.left = '94vw';
+          currentPage = 9;
+        }
+        if (currentPositionTop < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-100vh)';
+          box.style.top = '89vh';
+          currentPage = 6;
+        }
+        if (currentPositionBottom < 0) {
+          nineCtn.style.transform = 'translateX(-200vw) translateY(-200vh)';
+          box.style.top = '87vh';
+          currentPage = 9;
+        }
+        break;
     }
   }
 })
+
+
+function aboutMe() {
+  const aboutMe = document.querySelector('.about_me_arr');
+  aboutMe.classList.add('active');
+}
