@@ -26,6 +26,7 @@ function typing() {
 function init() {
   setInterval(getTime, 1000);
   setInterval(typing, 200);
+  setInterval(scrollCheck);
 }
 
 init();
@@ -34,22 +35,40 @@ init();
 const testBtn = document.querySelector('.test');
 const nineCtn = document.querySelector('.nine_container');
 const mainArr = document.querySelector('.main_arr');
+const contentsBtn = document.querySelector('.contents_btn');
+const contentsArr = document.querySelector('.contents');
+let pageCounter = 0;
 
 testBtn.addEventListener('click', () => {
-  nineCtn.classList.toggle('active');
-  mainArr.classList.toggle('active');
-  box.classList.toggle('active');
+  nineCtn.classList.add('active');
+  mainArr.classList.add('active');
+  box.classList.add('active');
+  pageCounter = 1;
 })
-// window noscrll
+
+contentsBtn.addEventListener('click', () => {
+  mainArr.classList.add('active');
+  contentsArr.classList.add('active');
+  pageCounter = 2;
+})
+
 function noScroll() {
   window.scrollTo(0, 0)
 }
-window.addEventListener('scroll', noScroll);
+// window noscrll
+function scrollCheck() {
+  if (pageCounter === 0) {
+  } else if (pageCounter === 1) {
+    window.addEventListener('scroll', noScroll);
+  } else if (pageCounter === 2) {
+
+  }
+}
 
 // 박스 움직임
 const box = document.querySelector('.box');
 let btnClicker = 100;
-let currentPage = 5;
+let currentPage = 1;
 
 window.addEventListener('keydown', (event) => {
   console.log(event.key);
