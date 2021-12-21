@@ -68,7 +68,7 @@ function scrollCheck() {
 // 박스 움직임
 const box = document.querySelector('.box');
 let btnClicker = 100;
-let currentPage = 1;
+let currentPage = 5;
 
 window.addEventListener('keydown', (event) => {
   console.log(event.key);
