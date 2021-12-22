@@ -11,7 +11,7 @@ function getTime() {
 }
 
 // 글자 하나씩 나타나는 함수
-const content = "안녕하세요 ";
+const content = "";
 const text = document.querySelector(".text");
 let i = 0;
 
