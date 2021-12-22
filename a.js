@@ -1,56 +1,25 @@
-const clock = document.querySelector('.h1-clock'); //시계 호출
-
-// 디지털 시계 함수 
-function getTime() {
-  const time = new Date();
-  const hour = time.getHours();
-  const minutes = time.getMinutes();
-  const seconds = time.getSeconds();
-  //clock.innerHTML = hour +":" + minutes + ":"+seconds;
-  clock.innerHTML = `${hour < 10 ? `0${hour}` : hour}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-}
-
-// 글자 하나씩 나타나는 함수
-const content = "";
-const text = document.querySelector(".text");
-let i = 0;
-
-function typing() {
-  if (i < content.length) {
-    let txt = content.charAt(i);
-    text.innerHTML += txt;
-    i++;
-  }
-}
-//init 
+// init 
 function init() {
-  setInterval(getTime, 1000);
-  setInterval(typing, 200);
-  setInterval(scrollCheck);
-}
 
+}
 init();
 
 // toggle 함수
 const testBtn = document.querySelector('.test');
 const nineCtn = document.querySelector('.nine_container');
-const mainArr = document.querySelector('.main_arr');
 const contentsBtn = document.querySelector('.contents_btn');
 const contentsArr = document.querySelector('.contents');
-let pageCounter = 0;
+let pageCounter = 1;
 
 testBtn.addEventListener('click', () => {
   nineCtn.classList.add('active');
-  mainArr.classList.add('active');
   box.classList.add('active');
-  pageCounter = 1;
-})
-
-contentsBtn.addEventListener('click', () => {
-  mainArr.classList.add('active');
   contentsArr.classList.add('active');
   pageCounter = 2;
+  scrollCheck();
+  window.scrollTo(0, 0)
 })
+
 
 function noScroll() {
   window.scrollTo(0, 0)
@@ -58,10 +27,9 @@ function noScroll() {
 // window noscrll
 function scrollCheck() {
   if (pageCounter === 0) {
-  } else if (pageCounter === 1) {
-    window.addEventListener('scroll', noScroll);
   } else if (pageCounter === 2) {
-
+    window.addEventListener('scroll', noScroll);
+  } else if (pageCounter === 1) {
   }
 }
 

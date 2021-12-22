@@ -7,18 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>keyu</title>
     <link rel="stylesheet" href="./style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 
 <body>
-    <div class="main_arr">
-        <div class="time_number">
-            <p class="h1-clock"></p>
-            <p class="text"></p>
-            <button class="test">start</button>
-            <button class="contents_btn">contents</button>
-        </div>
+    <script>
+        AOS.init();
+    </script>
 
-    </div>
+
     <div class="box">
 
     </div>
@@ -41,6 +40,8 @@
     </div>
 
     <section class="contents">
+
+
         <div class="contents_arr">
             <div class="home_container">
                 <div class="home_title_container">
@@ -54,37 +55,41 @@
         <div class="contents_arr">
             <div class="second_arr">
                 <div class="portfolio_container">
-                    <div class="second_01">
-                        <p class="number">01</p>
-                        <p class="sub_sub_title">프로젝트 개요</p>
-                        <p class="sub_sub_title_sub">About Project</p>
+                    <div class="second_01" data-aos="fade-up" data-aos-duration="1000">
+                        <p class="number" data-aos="fade-right" data-aos-duration="1000">01</p>
+                        <p class="sub_sub_title">About Project</p>
+                        <p class="sub_sub_title_sub">프로젝트 개요</p>
                         <p>개인 포트폴리오</p>
-                        <ul>
+                        <ul data-aos="fade-up" data-aos-duration="2000">
                             <li>김한성의 개인 포트폴리오 입니다.</li>
                             <li>제작기간: 12/15 ~</li>
                             <li> </li>
+                            <button class="test">start</button>
                         </ul>
                     </div>
                 </div>
                 <div class="portfolio_container_font">
                     <div class="font_color">
-                        <p class="number">02</p>
-                        <p class="sub_sub_title"> 폰트 / 색상</p>
-                        <p class="sub_sub_title_sub">Font / Color</p>
-                        <div class="color_img_container">
+                        <p class="number" data-aos="fade-right" data-aos-duration="1000">02</p>
+                        <p class="sub_sub_title" data-aos="fade-up" data-aos-duration="1000">Font / Color</p>
+                        <p class="sub_sub_title_sub" data-aos="fade-up" data-aos-duration="1000">폰트 / 색상</p>
+                        <div class="color_img_container" data-aos="fade-up" data-aos-duration="2000">
                             <div class="font_color_img"><img src="./image/portfolio_color_top.png"></div>
-                            <div class="font_color_img_2"><img src="./image/portflio_color_bottom.png"></div>
+                            <div class="font_color_img_2" data-aos="fade-up" data-aos-duration="2500"><img
+                                    src="./image/portflio_color_bottom.png"></div>
                         </div>
 
                     </div>
                 </div>
+                <div class="about_me_arr_container">
+                    <div class="about_me_arr_cnt">
+                        <p class="number">03</p>
+                        <p class="sub_sub_title">About Me</p>
+                        <p class="sub_sub_title_sub">김한성</p>
+                    </div>
+                </div>
             </div>
 
-        </div>
-        <div class="contents_arr">
-
-        </div>
-        <div class="contents_arr">
 
         </div>
 
@@ -92,6 +97,7 @@
 
 
     <script src="./a.js"></script>
+
 </body>
 
 </html>
