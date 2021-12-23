@@ -302,3 +302,20 @@ function aboutMe() {
   const aboutMe = document.querySelector('.about_me_arr');
   aboutMe.classList.add('active');
 }
+const scrollDownArrow = document.querySelector('.scroll-down');
+const contents = document.querySelector('.contents');
+const secondArr = document.querySelector('.second_arr');
+gsap.registerPlugin(ScrollTrigger);
+gsap.to(scrollDownArrow, {
+  duration: 0.5,
+  color: "white",
+  scrollTrigger: {
+    scroller: contents,
+    trigger: secondArr,
+    toggleActions: "play reverse play reverse",
+    scrub: true,
+    start: "center bottom",
+    end: "center top",
+    markers: true,
+  }
+});
