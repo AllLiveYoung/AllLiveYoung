@@ -1,8 +1,4 @@
-// init 
-function init() {
 
-}
-init();
 
 // toggle 함수
 const testBtn = document.querySelector('.test');
@@ -297,7 +293,6 @@ window.addEventListener('keydown', (event) => {
   }
 })
 
-
 function aboutMe() {
   const aboutMe = document.querySelector('.about_me_arr');
   aboutMe.classList.add('active');
@@ -305,17 +300,85 @@ function aboutMe() {
 const scrollDownArrow = document.querySelector('.scroll-down');
 const contents = document.querySelector('.contents');
 const secondArr = document.querySelector('.second_arr');
-gsap.registerPlugin(ScrollTrigger);
-gsap.to(scrollDownArrow, {
-  duration: 0.5,
-  color: "white",
-  scrollTrigger: {
-    scroller: contents,
-    trigger: secondArr,
-    toggleActions: "play reverse play reverse",
-    scrub: true,
-    start: "center bottom",
-    end: "center top",
-    markers: true,
+// gsap.registerPlugin(ScrollTrigger);
+// gsap.to(scrollDownArrow, {
+//   duration: 0.5,
+//   color: "white",
+//   scrollTrigger: {
+//     scroller: contents,
+//     trigger: secondArr,
+//     toggleActions: "play reverse play reverse",
+//     scrub: true,
+//     start: "center bottom",
+//     end: "center top",
+//     markers: true,
+//   }
+// });
+
+function activateString() {
+  //get string element
+  const li1 = document.querySelector('.li_transparent_1')
+  const li2 = document.querySelector('.li_transparent_2')
+  const li3 = document.querySelector('.li_transparent_3')
+  const li4 = document.querySelector('.li_transparent_4')
+
+
+  //get window height
+  var windowHeight = window.innerHeight / 1.2;
+  var elementHeight = li1.getBoundingClientRect().top;
+
+  //check windowHeight reaches element Height
+  if (elementHeight < windowHeight) {
+    li1.classList.add('active')
+    li2.classList.add('active')
+    li3.classList.add('active')
+    li4.classList.add('active')
   }
-});
+
+}
+
+window.addEventListener('scroll', activateString)
+
+
+var thirdArrContainer = document.querySelector('.third_arr');
+
+window.onwheel = changeBgColor;
+
+var scrollValue = 0;
+
+function changeBgColor(e) {
+  scrollValue += e.deltaY * 0.01;
+  console.log(scrollValue);
+  const scrollContainer = document.querySelector('.scroll_container');
+  if (scrollValue < 0) {
+    scrollValue = 0;
+  }
+
+  if (scrollValue > 23.5) {
+    thirdArrContainer.classList.add('active');
+    thirdArrContainer.classList.remove('active_2');
+  }
+  else if (scrollValue < 23.5) {
+    thirdArrContainer.classList.remove('active');
+    thirdArrContainer.classList.add('active_2');
+  }
+
+  if (scrollValue < 3) {
+    scrollDownArrow.classList.remove('active')
+  } else {
+    scrollDownArrow.classList.add('active')
+
+  }
+
+  // if (scrollValue >= 30 && scrollValue < 70) {
+  //   const winX = window.pageXOffset;
+  //   const winY = window.pageYOffset;
+  //   window.onscroll = function () {
+  //     window.scrollTo(winX, winY);
+  //     console.log('1111')
+  //   }
+  //   scrollContainer.classList.add('bg1')
+  // } else {
+  //   window.onscroll = function () { };
+  // }
+}
