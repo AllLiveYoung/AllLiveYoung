@@ -7,14 +7,14 @@ const contentsBtn = document.querySelector('.contents_btn');
 const contentsArr = document.querySelector('.contents');
 let pageCounter = 1;
 
-testBtn.addEventListener('click', () => {
-  nineCtn.classList.add('active');
-  box.classList.add('active');
-  contentsArr.classList.add('active');
-  pageCounter = 2;
-  scrollCheck();
-  window.scrollTo(0, 0)
-})
+// testBtn.addEventListener('click', () => {
+//   nineCtn.classList.add('active');
+//   box.classList.add('active');
+//   contentsArr.classList.add('active');
+//   pageCounter = 2;
+//   scrollCheck();
+//   window.scrollTo(0, 0)
+// })
 
 
 function noScroll() {
@@ -325,14 +325,19 @@ function activateString() {
 
   //get window height
   var windowHeight = window.innerHeight / 1.2;
-  var elementHeight = li1.getBoundingClientRect().top;
+  var liHeight = li1.getBoundingClientRect().top;
 
   //check windowHeight reaches element Height
-  if (elementHeight < windowHeight) {
+  if (liHeight < windowHeight) {
     li1.classList.add('active')
     li2.classList.add('active')
     li3.classList.add('active')
     li4.classList.add('active')
+  } else {
+    li1.classList.remove('active')
+    li2.classList.remove('active')
+    li3.classList.remove('active')
+    li4.classList.remove('active')
   }
 
 }
@@ -382,3 +387,49 @@ function changeBgColor(e) {
   //   window.onscroll = function () { };
   // }
 }
+
+const bubble1 = document.querySelector('.bubble_1');
+const bubble2 = document.querySelector('.bubble_2');
+const bubble3 = document.querySelector('.bubble_3');
+const bubble4 = document.querySelector('.bubble_4');
+
+const bubble1Ghost = document.querySelector('.bubble_1_ghost');
+const bubble2Ghost = document.querySelector('.bubble_2_ghost');
+const bubble3Ghost = document.querySelector('.bubble_3_ghost');
+const bubble4Ghost = document.querySelector('.bubble_4_ghost');
+
+const thirdArrContentsDiv = document.querySelector('.third_arr_contents_div_2');
+const moduel = document.querySelector('.moduel');
+
+
+bubble1.addEventListener('click', () => {
+  bubble1Ghost.classList.toggle('active');
+  bubble1.classList.toggle('active');
+  bubble2.classList.toggle('hidden');
+  bubble3.classList.toggle('hidden');
+  bubble4.classList.toggle('hidden');
+})
+
+bubble2.addEventListener('click', () => {
+  bubble2Ghost.classList.toggle('active');
+  bubble1.classList.toggle('hidden');
+  bubble2.classList.toggle('active');
+  bubble3.classList.toggle('hidden');
+  bubble4.classList.toggle('hidden');
+})
+bubble3.addEventListener('click', () => {
+  bubble3Ghost.classList.toggle('active');
+  bubble1.classList.toggle('hidden');
+  bubble2.classList.toggle('hidden');
+  bubble3.classList.toggle('active');
+  bubble4.classList.toggle('hidden');
+})
+bubble4.addEventListener('click', () => {
+  bubble4Ghost.classList.toggle('active');
+  bubble1.classList.toggle('hidden');
+  bubble2.classList.toggle('hidden');
+  bubble3.classList.toggle('hidden');
+  bubble4.classList.toggle('active');
+})
+
+
