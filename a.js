@@ -433,3 +433,18 @@ bubble4.addEventListener('click', () => {
 })
 
 
+
+function copyToClipboard(val) {
+  const t = document.createElement("textarea");
+  document.body.appendChild(t);
+  t.value = val;
+  t.select();
+  document.execCommand('copy');
+  document.body.removeChild(t);
+}
+function concconv() {
+  copyToClipboard('aksne._.');
+  console.log('Copied!');
+  const conc = document.querySelector('.concconv');
+  conc.classList.toggle('active');
+}
